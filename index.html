@@ -1,36 +1,247 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMRJ7866NK"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consola de Ingesta GA4 - BD2</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=TU_ID_AQUÍ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      // OJO: Agregué 'debug_mode': true para que lo veas en tiempo real en la clase
-      gtag('config', 'G-FMRJ7866NK', { 'debug_mode': true });
+      // Importante: 'debug_mode': true para la demo en vivo
+      gtag('config', 'TU_ID_AQUÍ', { 'debug_mode': true });
     </script>
-    </head>
+
+    <style>
+        /* Estilos CSS para ponerla estética */
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --primary-color: #bb86fc; /* Morado Google */
+            --secondary-color: #03dac6; /* Cian Google */
+            --accent-color: #cf6679; /* Rosa Google */
+            --shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-color);
+            opacity: 0.8;
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(187, 134, 252, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 5px var(--secondary-color);
+        }
+
+        .card-body {
+            flex-grow: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .json-preview {
+            background-color: #2d2d2d;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            color: #a9b7c6;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+
+        .key { color: var(--accent-color); }
+        .string { color: var(--primary-color); }
+        .number { color: #ffcb6b; }
+        .boolean { color: #89ddff; }
+
+        button {
+            background-color: var(--primary-color);
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background-color 0.2s, transform 0.1s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #d1b1ff;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
 <body>
-    <h1>¡Hola Mundo de Big Data!</h1>
-    <button onclick="gtag('event', 'click_exposicion', {'integrante': 'equipo_ingenieria'});">
-       Enviar Evento de Prueba
-    </button>
-    <div>
-        <button onclick="gtag('event', 'interaccion_web', {
-            'nombre_pila': 'Leonel',
-            'clase': 'Bases de Datos 2',
-            'tipo_dispositivo': 'Macbook Air'
-        });"> Button 2 </button>
+    <header>
+        <h1>Consola de Control de Eventos</h1>
+        <div class="subtitle">Ingesta de Big Data en Tiempo Real - Proyecto Bases de Datos 2</div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Interacción Simple</span>
+                <span class="status-dot"></span>
+            </div>
+            <div class="card-body">
+                Registra un evento básico de clic con parámetros fijos para demostrar el envío asíncrono.
+                <div class="json-preview">
+                    { <br>
+                    &nbsp;&nbsp;<span class="key">"event_name"</span>: <span class="string">"clic_ingenieria"</span>, <br>
+                    &nbsp;&nbsp;<span class="key">"params"</span>: { <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"seccion"</span>: <span class="string">"botones"</span>, <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"integrante"</span>: <span class="string">"equipo_expo"</span> <br>
+                    &nbsp;&nbsp;} <br>
+                    }
+                </div>
+            </div>
+            <button onclick="gtag('event', 'clic_ingenieria', {'seccion': 'botones', 'integrante': 'equipo_expo'});">
+                Registrar Clic
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Simulación de Registro</span>
+                <span class="status-dot"></span>
+            </div>
+            <div class="card-body">
+                Registra un evento que simula un registro de estudiante, ideal para explicar esquemas flexibles NoSQL.
+                <div class="json-preview">
+                    { <br>
+                    &nbsp;&nbsp;<span class="key">"event_name"</span>: <span class="string">"registro_estudiante"</span>, <br>
+                    &nbsp;&nbsp;<span class="key">"params"</span>: { <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"metodo"</span>: <span class="string">"demo_web"</span>, <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"seccion"</span>: <span class="number">2000</span> <br>
+                    &nbsp;&nbsp;} <br>
+                    }
+                </div>
+            </div>
+            <button onclick="gtag('event', 'registro_estudiante', {'metodo': 'demo_web', 'seccion': 2000});">
+                Registrar Estudiante
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">Simulación de Query</span>
+                <span class="status-dot"></span>
+            </div>
+            <div class="card-body">
+                Envía parámetros numéricos y booleanos. Muestra cómo se ven estos tipos de datos en un campo RECORD de BigQuery.
+                <div class="json-preview">
+                    { <br>
+                    &nbsp;&nbsp;<span class="key">"event_name"</span>: <span class="string">"simulacion_query"</span>, <br>
+                    &nbsp;&nbsp;<span class="key">"params"</span>: { <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"tiempo_ms"</span>: <span class="number">450</span>, <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"exito"</span>: <span class="boolean">true</span> <br>
+                    &nbsp;&nbsp;} <br>
+                    }
+                </div>
+            </div>
+            <button onclick="gtag('event', 'simulacion_query', {'tiempo_ms': 450, 'exito': true});">
+                Simular Query
+            </button>
+        </div>
     </div>
-    <div>
-        <button onclick="gtag('event', 'simulacion_query', {
-            'tiempo_ms': 450,
-            'filas_afectadas': 1500,
-            'exito':  true
-        });">
-            Button 3
-        </button>
-    </div>
+
+    <footer>
+        Desarrollado por: Leonel, Josue, Cindy, Jasmin, Carlos, Anthony
+    </footer>
+
+    <script>
+        console.log("Consola de Ingesta GA4 - BD2 lista y estética.");
+    </script>
 </body>
 </html>
