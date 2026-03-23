@@ -16,5 +16,21 @@
     <button onclick="gtag('event', 'click_exposicion', {'integrante': 'equipo_ingenieria'});">
        Enviar Evento de Prueba
     </button>
+    <div>
+        <button onclick="gtag('event', 'interaccion_web', {
+            'nombre_pila': 'Leonel',
+            'clase': 'Bases de Datos 2',
+            'tipo_dispositivo': 'Macbook Air'
+        });"> Button 2 </button>
+    </div>
+    <div>
+        <button onclick="gtag('event', 'simulacion_query', {
+            'tiempo_ms': 450,
+            'filas_afectadas': 1500,
+            'exito':  true
+        });">
+            Button 3
+        </button>
+    </div>
 </body>
 </html>
